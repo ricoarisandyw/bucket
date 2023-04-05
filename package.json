@@ -3,17 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "module": "true",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node index.js",
-    "build": "npx esbuild index.js  --bundle --outfile=build/index.js --platform=node --tree-shaking=true --minify",
+    "build": "npx esbuild index.js  --bundle --outfile=build/index.js --format=esm --platform=node --tree-shaking=true --minify",
     "start": "node build/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "formidable": "^2.1.1",

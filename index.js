@@ -3,15 +3,12 @@ require('dotenv').config();
 const express = require('express');
 const BucketUtils = require('./bucket')
 const formidable = require('formidable')
+const cors = require('cors')
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+app.use(cors());
 
-// // Connect to MongoDB
-// const conn = mongoose.createConnection(process.env.DATABASE_URL, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-// });
+const PORT = process.env.PORT || 3000;
 
 // Route to upload file
 app.post('/upload', async (req, res) => {
