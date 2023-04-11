@@ -3,7 +3,9 @@ require('dotenv').config();
 const express = require('express');
 const BucketUtils = require('./bucket')
 const formidable = require('formidable')
+const https = require('https')
 const cors = require('cors')
+const fs = require('fs')
 
 const app = express();
 app.use(cors());
@@ -37,6 +39,20 @@ app.get('/download/:filename', async (req, res) => {
     (await BucketUtils.download(filename)).pipe(res)
 });
 
-app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//     console.log(`Server listening on port ${PORT}`);
+// });
+
+https
+  .createServer(
+    {
+      key: fs.readFileSync("server.key"),
+      cert: fs.readFileSync("server.cert"),
+    },
+    app
+  )
+  .listen(PORT, function () {
+    console.log(
+      "Example app listening on port 4000! Go to https://localhost:4000/"
+    );
+  });
