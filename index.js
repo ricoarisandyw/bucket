@@ -31,7 +31,8 @@ app.get('/', async (req, res) => {
 
 // Route to upload file
 app.post('/upload', async (req, res) => {
-  const form = formidable({ multiples: true });
+  const form = formidable({ multiples: true, maxFileSize: 300 * 1024 * 1024 });
+  form.max
   const file = await new Promise((resolve) =>
     form.parse(req, (err, fields, files) => {
       resolve(files);
